@@ -4,41 +4,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Day3 {
+    static int sum = 0;
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/day3");
         for (int i = 0; i < fileData.size(); i++) {
             String currentInstruction = fileData.get(i);
-            System.out.println(findLargest(currentInstruction));
+            findLargest(currentInstruction);
         }
+        System.out.println(sum);
     }
 
-public static String findLargest(String currentInst){
+public static void findLargest(String currentInst){
         int firstMax = 0;
-        int nextMax = 0;
-        int firstPos = 0;
-        int secondPos = 0;
     for (int i = 0; i < currentInst.length(); i++) {
-        int currentNum = Integer.parseInt(currentInst.substring(i,i+1));
-        if (currentNum > firstMax){
-            firstMax = currentNum;
-            firstPos = i;
+        String currentNum = currentInst.substring(i, i + 1);
+        String toParse;
+        for (int x = i+1; x < currentInst.length(); x++) {
+            toParse = currentNum + currentInst.charAt(x);
+            if (Integer.parseInt(toParse) > firstMax){
+                firstMax = Integer.parseInt(toParse);
+            }
         }
     }
-    System.out.println("first pos" + firstPos);
-    for (int i = 0; i < currentInst.length(); i++) {
-        int currentNum = Integer.parseInt(currentInst.substring(i,i+1));
-        if (currentNum < firstMax && currentNum > nextMax ){
-            nextMax = currentNum;
-            secondPos = i;
-        }
-    }
-    if (secondPos < firstPos){
-        int tmp = firstMax;
-        firstMax = nextMax;
-        nextMax = tmp;
-    }
-
-    return "" + firstMax + nextMax ;
+    sum+=firstMax;
 }
 
 
