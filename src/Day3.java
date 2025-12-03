@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Day3 {
-    static int sum = 0;
+    static long sum = 0;
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/day3");
         for (int i = 0; i < fileData.size(); i++) {
@@ -15,17 +15,25 @@ public class Day3 {
     }
 
 public static void findLargest(String currentInst){
-        int firstMax = 0;
+        long firstMax = 0;
     for (int i = 0; i < currentInst.length(); i++) {
         String currentNum = currentInst.substring(i, i + 1);
         String toParse;
         for (int x = i+1; x < currentInst.length(); x++) {
-            toParse = currentNum + currentInst.charAt(x);
-            if (Integer.parseInt(toParse) > firstMax){
-                firstMax = Integer.parseInt(toParse);
+            toParse = currentNum;
+            for (int p = x; p < currentInst.length(); p++) {
+                if (toParse.length() < 12){
+                    toParse += currentInst.substring(p,p+1);
+                }else{
+                    break;
+                }
+            }
+            if (Long.parseLong(toParse) > firstMax){
+                firstMax = Long.parseLong(toParse);
             }
         }
     }
+    System.out.println(firstMax);
     sum+=firstMax;
 }
 
