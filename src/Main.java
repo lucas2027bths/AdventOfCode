@@ -10,7 +10,7 @@ public class Main {
         HashMap<String, Integer> vars = new HashMap<>();
         vars.put("a",0);
         vars.put("b",0);
-        vars.put("c",0);
+        vars.put("c",1);
         vars.put("d",0);
         for (int i = 0; i < fileData.size(); i++) {
             String currentInstruction = fileData.get(i);
