@@ -30,19 +30,31 @@ public class Day4 {
                 System.out.println("check down");
                 System.out.println(checkDown(x,LastInstruction));
                 System.out.println();
+                System.out.println("check south west ");
+                System.out.println(diagnoalLeft(x,nextInstruction));
+                System.out.println();
+                System.out.println("check south east ");
+                System.out.println(diagonalRight(x,nextInstruction));
+                System.out.println();
+                System.out.println("check north west ");
+                System.out.println(diagnoalLeft(x,LastInstruction));
+                System.out.println();
+                System.out.println("check north east ");
+                System.out.println(diagonalRight(x,LastInstruction));
+                System.out.println();
             }
         }
 
     }
 
     public static boolean checkRight(String CurrentInstruction, int index){
-        if (index < CurrentInstruction.length()-1 && CurrentInstruction.substring(index+1,index+2).equals("@")) {
+        if ( !(CurrentInstruction.equals("")) && index < CurrentInstruction.length()-1 && CurrentInstruction.substring(index+1,index+2).equals("@")) {
             return true;
         }
         return false;
     }
     public static boolean checkLeft(String CurrentInstruction, int index){
-        if (index - 1 > 0 && CurrentInstruction.substring(index-1,index).equals("@")) {
+        if (!(CurrentInstruction.equals("")) && index - 1 > 0 && CurrentInstruction.substring(index-1,index).equals("@")) {
             return true;
         }
         return false;
@@ -63,17 +75,11 @@ public class Day4 {
             };
         return false;
     }
-    public static boolean northWest(int index,String nextInstruction){
-
+    public static boolean diagnoalLeft(int index,String nextInstruction){
+        return checkLeft(nextInstruction,index);
     }
-    public static boolean northEast(int index,String nextInstruction){
-
-    }
-    public static boolean southEast(int index,String nextInstruction){
-
-    }
-    public static boolean southWest(int index,String nextInstruction){
-
+    public static boolean diagonalRight(int index,String nextInstruction){
+        return checkRight(nextInstruction,index);
     }
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
