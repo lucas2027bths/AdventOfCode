@@ -30,18 +30,18 @@ public class Day4 {
                 System.out.println("check down");
                 System.out.println(checkDown(x,LastInstruction));
                 System.out.println();
-                System.out.println("check south west ");
-                System.out.println(diagnoalLeft(x,nextInstruction));
-                System.out.println();
-                System.out.println("check south east ");
-                System.out.println(diagonalRight(x,nextInstruction));
-                System.out.println();
                 System.out.println("check north west ");
-                System.out.println(diagnoalLeft(x,LastInstruction));
-                System.out.println();
-                System.out.println("check north east ");
-                System.out.println(diagonalRight(x,LastInstruction));
-                System.out.println();
+
+                System.out.println("DIAGONAL DOWN");
+                System.out.println("check right");
+                System.out.println(checkRight(LastInstruction,x));
+                System.out.println("check left");
+                System.out.println(checkLeft(LastInstruction,x));
+                System.out.println("DIAGONAL UP");
+                System.out.println("check right");
+                System.out.println(checkRight(nextInstruction,x));
+                System.out.println("check left");
+                System.out.println(checkLeft(nextInstruction,x));
             }
         }
 
@@ -54,7 +54,7 @@ public class Day4 {
         return false;
     }
     public static boolean checkLeft(String CurrentInstruction, int index){
-        if (!(CurrentInstruction.equals("")) && index - 1 > 0 && CurrentInstruction.substring(index-1,index).equals("@")) {
+        if (!(CurrentInstruction.equals("")) && index - 1 >= 0 && CurrentInstruction.substring(index-1,index).equals("@")) {
             return true;
         }
         return false;
@@ -74,12 +74,6 @@ public class Day4 {
                 return true;
             };
         return false;
-    }
-    public static boolean diagnoalLeft(int index,String nextInstruction){
-        return checkLeft(nextInstruction,index);
-    }
-    public static boolean diagonalRight(int index,String nextInstruction){
-        return checkRight(nextInstruction,index);
     }
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
