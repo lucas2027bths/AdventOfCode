@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Day4 {
 
     public static void main(String[] args) {
@@ -47,7 +46,6 @@ public class Day4 {
         return 0;
     }
     public static int checkDown(int index,String nextInstruction){
-        ArrayList<String> fileData = getFileData("src/day4");
             String nextLine = nextInstruction;
             if (!(nextLine.equals("")) && nextLine.substring(index,index+1).equals("@")){
                 return 1;
@@ -55,7 +53,6 @@ public class Day4 {
         return 0;
     }
     public static int checkUp(int index,String nextInstruction){
-        ArrayList<String> fileData = getFileData("src/day4");
             String nextLine = nextInstruction;
             if (!(nextLine.equals("")) && nextLine.substring(index,index+1).equals("@")){
                 return 1;
