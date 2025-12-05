@@ -3,41 +3,25 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Day3 {
     static long sum = 0;
-    public static void main(String[] args) {
+    void main() {
         ArrayList<String> fileData = getFileData("src/day3");
         for (int i = 0; i < fileData.size(); i++) {
             String currentInstruction = fileData.get(i);
-            findLargest(currentInstruction);
+            StringBuilder builder = new StringBuilder();
+            int deletes = currentInstruction.length() - 12;
+            for (int j = 0; j < currentInstruction.length(); j++) {
+                while (!builder.isEmpty() && currentInstruction.charAt(j) > builder.charAt(builder.length()-1) && deletes > 0){
+                    deletes=- 1;
+                    builder.deleteCharAt(builder.length()-1);
+                }
+                builder.append(currentInstruction.charAt(j));
+            }
+            System.out.println(builder.toString());
+            sum += Long.parseLong(builder.substring(0,12));
         }
         System.out.println(sum);
     }
-
-public static void findLargest(String currentInst){
-        long firstMax = 0;
-    for (int i = 0; i < currentInst.length(); i++) {
-        String currentNum = currentInst.substring(i, i + 1);
-        String toParse;
-        for (int x = i+1; x < currentInst.length(); x++) {
-            toParse = currentNum;
-            for (int p = x; p < currentInst.length(); p++) {
-                if (toParse.length() < 12){
-                    toParse += currentInst.substring(p,p+1);
-                }else{
-                    break;
-                }
-            }
-            if (Long.parseLong(toParse) > firstMax){
-                firstMax = Long.parseLong(toParse);
-            }
-        }
-    }
-    System.out.println(firstMax);
-    sum+=firstMax;
-}
-
-
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
         try {
@@ -54,4 +38,3 @@ public static void findLargest(String currentInst){
             return fileData;
         }
     }
-}
