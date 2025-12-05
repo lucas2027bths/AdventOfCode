@@ -3,9 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Day3 {
     static long sum = 0;
-    static void main() {
+    void main() {
         ArrayList<String> fileData = getFileData("src/day3");
         for (int i = 0; i < fileData.size(); i++) {
             String currentInstruction = fileData.get(i);
@@ -13,7 +12,7 @@ public class Day3 {
             int deletes = currentInstruction.length() - 12;
             for (int j = 0; j < currentInstruction.length(); j++) {
                 while (!builder.isEmpty() && currentInstruction.charAt(j) > builder.charAt(builder.length()-1) && deletes > 0){
-                    deletes= deletes - 1;
+                    deletes=- 1;
                     builder.deleteCharAt(builder.length()-1);
                 }
                 builder.append(currentInstruction.charAt(j));
@@ -39,4 +38,3 @@ public class Day3 {
             return fileData;
         }
     }
-}

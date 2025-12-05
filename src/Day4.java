@@ -7,73 +7,60 @@ public class Day4 {
 
     public static void main(String[] args) {
         ArrayList<String> fileData = getFileData("src/day4");
-        for (int i = 0; i < fileData.size(); i++) {
-            System.out.println("new line");
-            String currentinstruction = fileData.get(i);
-            String nextInstruction = "";
-            String LastInstruction = "";
-            if (i < fileData.size()-1){
-                LastInstruction = fileData.get(i+1);
-            }
-            if (i > 0){
-                nextInstruction = fileData.get(i-1);
-            }
-            for (int x = 0; x < currentinstruction.length();x++){
-                System.out.println("THE CURRENT CHARACTER IS" + currentinstruction.charAt(x));
-                System.out.println();
-                System.out.println("check right");
-                System.out.println(checkRight(currentinstruction,x));
-                System.out.println("check left");
-                System.out.println(checkLeft(currentinstruction,x));
-                System.out.println("check up");
-                System.out.println(checkUp(x,nextInstruction));
-                System.out.println("check down");
-                System.out.println(checkDown(x,LastInstruction));
-                System.out.println();
-                System.out.println("check north west ");
-
-                System.out.println("DIAGONAL DOWN");
-                System.out.println("check right");
-                System.out.println(checkRight(LastInstruction,x));
-                System.out.println("check left");
-                System.out.println(checkLeft(LastInstruction,x));
-                System.out.println("DIAGONAL UP");
-                System.out.println("check right");
-                System.out.println(checkRight(nextInstruction,x));
-                System.out.println("check left");
-                System.out.println(checkLeft(nextInstruction,x));
+        long sum = 0;
+        long oldersum = -1;
+        while (sum > oldersum) {
+            oldersum = sum;
+            for (int i = 0; i < fileData.size(); i++) {
+                String currentinstruction = fileData.get(i);
+                String lastInstruction = "";
+                String nextInstruction = "";
+                if (i < fileData.size()-1){
+                    nextInstruction = fileData.get(i+1);
+                }
+                if (i > 0){
+                    lastInstruction = fileData.get(i-1);
+                }
+                for (int x = 0; x < currentinstruction.length();x++){
+                    int amount = (checkRight(currentinstruction,x))+ (checkLeft(currentinstruction,x)) + (checkUp(x,lastInstruction)) + (checkDown(x,nextInstruction)) + (checkRight(nextInstruction,x)) + (checkLeft(nextInstruction,x)) +(checkRight(lastInstruction,x)) +(checkLeft(lastInstruction,x));
+                    if (currentinstruction.charAt(x) == '@' && amount < 4) {
+                        fileData.set(i,currentinstruction.substring(0,x) + "." + currentinstruction.substring(x+1));
+                        currentinstruction = fileData.get(i);
+                        sum += 1;
+                    }
+                }
             }
         }
-
+        System.out.println(sum);
     }
 
-    public static boolean checkRight(String CurrentInstruction, int index){
-        if ( !(CurrentInstruction.equals("")) && index < CurrentInstruction.length()-1 && CurrentInstruction.substring(index+1,index+2).equals("@")) {
-            return true;
+    public static int checkRight(String CurrentInstruction, int index){
+        if ( !(CurrentInstruction.isEmpty()) && index < CurrentInstruction.length()-1 && CurrentInstruction.substring(index+1,index+2).equals("@")) {
+            return 1;
         }
-        return false;
+        return 0;
     }
-    public static boolean checkLeft(String CurrentInstruction, int index){
-        if (!(CurrentInstruction.equals("")) && index - 1 >= 0 && CurrentInstruction.substring(index-1,index).equals("@")) {
-            return true;
+    public static int checkLeft(String CurrentInstruction, int index){
+        if (!(CurrentInstruction.isEmpty()) && index - 1 >= 0 && CurrentInstruction.substring(index-1,index).equals("@")) {
+            return 1;
         }
-        return false;
+        return 0;
     }
-    public static boolean checkDown(int index,String nextInstruction){
+    public static int checkDown(int index,String nextInstruction){
         ArrayList<String> fileData = getFileData("src/day4");
             String nextLine = nextInstruction;
             if (!(nextLine.equals("")) && nextLine.substring(index,index+1).equals("@")){
-                return true;
+                return 1;
             };
-        return false;
+        return 0;
     }
-    public static boolean checkUp(int index,String nextInstruction){
+    public static int checkUp(int index,String nextInstruction){
         ArrayList<String> fileData = getFileData("src/day4");
             String nextLine = nextInstruction;
             if (!(nextLine.equals("")) && nextLine.substring(index,index+1).equals("@")){
-                return true;
+                return 1;
             };
-        return false;
+        return 0;
     }
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
