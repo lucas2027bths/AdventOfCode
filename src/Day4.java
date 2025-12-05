@@ -21,7 +21,7 @@ public class Day4 {
                     lastInstruction = fileData.get(i-1);
                 }
                 for (int x = 0; x < currentinstruction.length();x++){
-                    int amount = (checkRight(currentinstruction,x))+ (checkLeft(currentinstruction,x)) + (checkUp(x,lastInstruction)) + (checkDown(x,nextInstruction)) + (checkRight(nextInstruction,x)) + (checkLeft(nextInstruction,x)) +(checkRight(lastInstruction,x)) +(checkLeft(lastInstruction,x));
+                    int amount = (checkRight(currentinstruction,x))+ (checkLeft(currentinstruction,x)) + (checkUp(x,lastInstruction)) + (checkUp(x,nextInstruction)) + (checkRight(nextInstruction,x)) + (checkLeft(nextInstruction,x)) +(checkRight(lastInstruction,x)) +(checkLeft(lastInstruction,x));
                     if (currentinstruction.charAt(x) == '@' && amount < 4) {
                         fileData.set(i,currentinstruction.substring(0,x) + "." + currentinstruction.substring(x+1));
                         currentinstruction = fileData.get(i);
@@ -43,13 +43,6 @@ public class Day4 {
         if (!(CurrentInstruction.isEmpty()) && index - 1 >= 0 && CurrentInstruction.substring(index-1,index).equals("@")) {
             return 1;
         }
-        return 0;
-    }
-    public static int checkDown(int index,String nextInstruction){
-            String nextLine = nextInstruction;
-            if (!(nextLine.equals("")) && nextLine.substring(index,index+1).equals("@")){
-                return 1;
-            };
         return 0;
     }
     public static int checkUp(int index,String nextInstruction){
