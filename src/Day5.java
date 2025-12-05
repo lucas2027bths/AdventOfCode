@@ -26,12 +26,21 @@ public class Day5 {
             }
             Collections.sort(mins);
         Collections.sort(maxs);
+        for (int x = 0; x < maxs.size(); x++){
+            long currentMax = maxs.get(x);
+            long currentMin = mins.get(x);
+            if (x>0 && currentMin < maxs.get(x-1)){
+                currentMin = maxs.get(x-1);
+                currentMin+=1;
+            }
+            amountOfFresh+= Math.abs(currentMin-currentMax) + 1;
+            if (x>0 && currentMin == maxs.get(x-1)){
+                amountOfFresh-=1;
+            }
+        }
+        System.out.println(amountOfFresh);
         System.out.println(mins);
         System.out.println(maxs);
-
-
-
-        System.out.println(amountOfFresh);
     }
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
