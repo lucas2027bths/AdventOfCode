@@ -18,13 +18,13 @@ public class Day7 {
     }
 
     public static void Beam(int charIndex, int lineStart) {
+        amountOfSplits++;
         for (int i = lineStart ; i < fileData.size(); i++) {
             String currentInst = fileData.get(i);
             if (currentInst.charAt(charIndex) == '|') {
                 return;
             }
             if (currentInst.charAt(charIndex) == '^') {
-                amountOfSplits++;
                 Beam(charIndex+1, i);
                 Beam(charIndex-1, i);
                 break;
